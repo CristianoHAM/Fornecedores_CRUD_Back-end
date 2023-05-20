@@ -1,4 +1,6 @@
 package com.example.fornecedores.empresa;
 
-public interface EmpresaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 }

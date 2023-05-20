@@ -1,4 +1,4 @@
 package com.example.fornecedores.empresa;
 
-public record EmpresaRequestDTO() {
+public record EmpresaRequestDTO(String cnpj, String nomeFantasia, String cep) {
 }

@@ -17,7 +17,7 @@ public class FornecedorController {
 
     @PostMapping
     public void saveMotorcycle(@RequestBody FornecedorRequestDTO data) {
-        Motorcycle fornecedor = new Fornecedor(data);
+        Fornecedor fornecedor = new Fornecedor(data);
         repository.save(fornecedor);
     }
 

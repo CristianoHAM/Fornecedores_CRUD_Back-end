@@ -20,7 +20,7 @@ public class Fornecedor {
     private String email;
     private String cep;
 
-    public Fornecedor(EmpresaRequestDTO data) {
+    public Fornecedor(FornecedorRequestDTO data) {
         this.cpfCnpj = data.cpfCnpj();
         this.nome = data.nome();
         this.email = data.email();

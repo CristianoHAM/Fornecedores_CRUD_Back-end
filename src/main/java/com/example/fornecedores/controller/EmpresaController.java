@@ -22,7 +22,7 @@ public class EmpresaController {
 
     @PostMapping
     public void saveMotorcycle(@RequestBody EmpresaRequestDTO data) {
-        Motorcycle empresa = new Empresa(data);
+        Empresa empresa = new Empresa(data);
         repository.save(empresa);
     }
 
