@@ -1,14 +1,13 @@
 package com.example.fornecedores.controller;
 
-import com.example.fornecedores.empresa.Empresa;
-import com.example.fornecedores.empresa.EmpresaRepository;
-import com.example.fornecedores.empresa.EmpresaRequestDTO;
-import com.example.fornecedores.empresa.EmpresaResponseDTO;
-import com.example.fornecedores.fornecedor.Fornecedor;
-import com.example.fornecedores.fornecedor.FornecedorRepository;
-import com.example.fornecedores.fornecedor.FornecedorRequestDTO;
-import com.example.fornecedores.fornecedor.FornecedorResponseDTO;
+import com.example.fornecedores.entities.Empresa;
+import com.example.fornecedores.repositories.EmpresaRepository;
+import com.example.fornecedores.dto.EmpresaRequestDTO;
+import com.example.fornecedores.dto.EmpresaResponseDTO;
+import com.example.fornecedores.service.EmpresaService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,17 +17,17 @@ import java.util.List;
 @CrossOrigin()
 public class EmpresaController {
     @Autowired
-    private EmpresaRepository repository;
+    private EmpresaService empresaService;
 
-    @PostMapping
-    public void saveMotorcycle(@RequestBody EmpresaRequestDTO data) {
-        Empresa empresa = new Empresa(data);
-        repository.save(empresa);
-    }
+    //@PostMapping
+    //public void saveMotorcycle(@RequestBody EmpresaRequestDTO data) {
+    //    Empresa empresa = new Empresa(data);
+    //    repository.save(empresa);
+    //}
 
     @GetMapping
-    public List<EmpresaResponseDTO> getAll() {
-        List<EmpresaResponseDTO> empresa = repository.findAll().stream().map(EmpresaResponseDTO::new).toList();
-        return empresa;
+    public ResponseEntity<List<EmpresaResponseDTO>> findAll() {
+        List<EmpresaResponseDTO> empresas = empresaService.findAll();
+        return ResponseEntity.ok(empresas);
     }
 }

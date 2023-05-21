@@ -1,7 +1,7 @@
 -- Tabela Empresa
 CREATE TABLE empresa (
   CNPJ VARCHAR(14) PRIMARY KEY,
-  NomeFantasia VARCHAR(100),
+  nomeFantasia VARCHAR(100),
   CEP VARCHAR(8)
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE fornecedor (
 
 -- Tabela de junção
 CREATE TABLE empresa_fornecedor (
-  Empresa_CNPJ VARCHAR(14) REFERENCES Empresa(CNPJ),
-  Fornecedor_CNPJCPF VARCHAR(14) REFERENCES Fornecedor(CNPJCPF),
-  PRIMARY KEY (Empresa_CNPJ, Fornecedor_CNPJCPF)
+  empresa_fk VARCHAR(14) REFERENCES empresa(CNPJ),
+  fornecedor_fk VARCHAR(14) REFERENCES fornecedor(CNPJCPF),
+  PRIMARY KEY (empresa_fk, fornecedor_fk)
 );
