@@ -1,7 +1,6 @@
 package com.example.fornecedores.dto;
 
 import com.example.fornecedores.entities.Empresa;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +24,7 @@ public class EmpresaDTO {
         cnpj = empresa.getCnpj();
         nomeFantasia = empresa.getNomefantasia();
         cep = empresa.getCep();
-        fornecedores = empresa.getFornecedores().stream().map(x -> new  FornecedorDTO(x)).collect(Collectors.toList());
+        fornecedores = empresa.getFornecedores().stream().map(FornecedorDTO::new).collect(Collectors.toList());
     }
 
     public String getCnpj() {

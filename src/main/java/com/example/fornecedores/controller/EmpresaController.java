@@ -1,15 +1,16 @@
 package com.example.fornecedores.controller;
 
-import com.example.fornecedores.dto.EmpresaDTO;
-import com.example.fornecedores.dto.EmpresaInsertDTO;
-import com.example.fornecedores.dto.EmpresaResponseDTO;
+import com.example.fornecedores.dto.*;
 import com.example.fornecedores.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.List;
+import java.net.URI;
+
 
 @RestController
 @RequestMapping("empresa")
@@ -18,24 +19,20 @@ public class EmpresaController {
     @Autowired
     private EmpresaService service;
 
-   // @GetMapping
-   // public List<EmpresaResponseDTO> findAll() {
-   //     List<EmpresaResponseDTO> empresas = service.findAll();
-   //     return empresas;
-    //}
     @GetMapping
-    private Page<EmpresaDTO> findAll(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size
-    ){
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<EmpresaDTO> registros = service.findAll(pageRequest);
-        return registros;
+    public ResponseEntity<Page<EmpresaResponseDTO>> findAll(Pageable pageable){
+        Page<EmpresaResponseDTO> empresas = service.findAll(pageable);
+        return ResponseEntity.ok(empresas);
     }
 
     @PostMapping
-    public void  insert(@RequestBody EmpresaInsertDTO data) {
-        EmpresaDTO empresa = service.insert(data);
+    public ResponseEntity<EmpresaDTO> insert(@RequestBody EmpresaInsertDTO data){
+        try{
+            EmpresaDTO fornecedor = service.insert(data);
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(data.getCnpj()).toUri();
+            return ResponseEntity.created(uri).body(fornecedor);
+        }catch (SecurityException e){
+            return ResponseEntity.unprocessableEntity().build();
+        }
     }
-
 }

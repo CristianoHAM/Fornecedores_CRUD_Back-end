@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,13 +23,17 @@ public class Empresa  {
     private String nomefantasia;
     @Column
     private String cep;
-//   @OneToMany(mappedBy = "empresa")
-//   @ManyToMany(mappedBy = "empresas", cascade = CascadeType.ALL)
     @ManyToMany
     @JoinTable(name = "empresa_fornecedor",
         joinColumns = @JoinColumn(name = "empresa_fk"),
         inverseJoinColumns= @JoinColumn( name = "fornecedor_fk"))
     Set<Fornecedor> fornecedores = new HashSet<>();
+
+    public Empresa(EmpresaInsertDTO data){
+        this.cnpj = data.getCnpj();
+        this.nomefantasia = data.getNomeFantasia();
+        this.cep = data.getCep();
+    }
 
 
 

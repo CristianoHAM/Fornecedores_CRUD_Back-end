@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,20 +24,17 @@ public class Fornecedor  {
     private String email;
     @Column
     private String cep;
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "empresa_fornecedor",
-//            joinColumns = @JoinColumn(name = "fornecedor_fk"),
-//            inverseJoinColumns= @JoinColumn( name = "empresa_fk"))
-//    private List<Empresa> empresas;
-//    @OneToMany(mappedBy = "fornecedor")
     @ManyToMany(mappedBy = "fornecedores")
     private Set<Empresa> empresas = new HashSet<>();
 
     public Fornecedor(FornecedorInsertDTO data) {
-        this.cnpjcpf = data.cpfCnpj();
-        this.nome = data.nome();
-        this.email = data.email();
-        this.cep = data.cep();
+        this.cnpjcpf = data.getCnpjcpf();
+        this.nome = data.getNome();
+        this.email = data.getEmail();
+        this.cep = data.getCep();
+    }
+    public String getCpfCnpj() {
+        return this.cnpjcpf;
     }
 
 

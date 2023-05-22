@@ -3,29 +3,31 @@ package com.example.fornecedores.dto;
 import com.example.fornecedores.entities.Fornecedor;
 
 public class FornecedorDTO {
-    private String cpfCnpj;
+    private String cnpjcpf;
     private String nome;
     private String email;
     private String cep;
 
+
     public FornecedorDTO() {
     }
 
-    public FornecedorDTO(String cpfCnpj, String nome, String email, String cep) {
-        this.cpfCnpj = cpfCnpj;
+    public FornecedorDTO(String cnpjcpf, String nome, String email, String cep) {
+        this.cnpjcpf = cnpjcpf;
         this.nome = nome;
         this.email = email;
         this.cep = cep;
+
     }
     public FornecedorDTO(Fornecedor fornecedor){
-         cpfCnpj = fornecedor.getCnpjcpf();
+         cnpjcpf = fornecedor.getCnpjcpf();
          nome = fornecedor.getNome();
          email = fornecedor.getEmail();
          cep = fornecedor.getCep();
     }
 
-    public void setCpfCnpj(String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
+    public void setCnpjcpf(String cnpjcpf) {
+        this.cnpjcpf = cnpjcpf;
     }
 
     public void setNome(String nome) {
@@ -41,8 +43,8 @@ public class FornecedorDTO {
     }
 
 
-    public String getCpfCnpj() {
-        return cpfCnpj;
+    public String getCnpjcpf() {
+        return cnpjcpf;
     }
 
     public String getNome() {

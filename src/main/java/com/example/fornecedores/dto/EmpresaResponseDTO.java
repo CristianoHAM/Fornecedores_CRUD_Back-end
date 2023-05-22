@@ -1,9 +1,6 @@
 package com.example.fornecedores.dto;
 
 import com.example.fornecedores.entities.Empresa;
-import com.example.fornecedores.entities.RegistroEmpresa;
-
-import java.util.Set;
 
 public record EmpresaResponseDTO(String cnpj, String nomeFantasia, String cep) {
     public EmpresaResponseDTO(Empresa empresa){
