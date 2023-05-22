@@ -19,7 +19,7 @@ public class EmpresaInsertDTO {
     }
     public EmpresaInsertDTO(Empresa empresa){
         cnpj = empresa.getCnpj();
-        nomeFantasia = empresa.getNomefantasia();
+        nomeFantasia = empresa.getNomeFantasia();
         cep = empresa.getCep();
     }
 

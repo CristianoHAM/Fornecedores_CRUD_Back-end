@@ -22,7 +22,7 @@ public class EmpresaDTO {
     }
     public EmpresaDTO(Empresa empresa){
         cnpj = empresa.getCnpj();
-        nomeFantasia = empresa.getNomefantasia();
+        nomeFantasia = empresa.getNomeFantasia();
         cep = empresa.getCep();
         fornecedores = empresa.getFornecedores().stream().map(FornecedorDTO::new).collect(Collectors.toList());
     }

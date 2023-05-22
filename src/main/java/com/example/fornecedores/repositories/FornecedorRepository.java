@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FornecedorRepository extends JpaRepository<Fornecedor, String> {
 
     Fornecedor findByCnpjcpf(String cnpjcpf);
+    Fornecedor findByCep(String cep);
     Page<Fornecedor> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
     Page<Fornecedor> findByCnpjcpfContainingIgnoreCase(String cnpjcpf, Pageable pageable);
 }

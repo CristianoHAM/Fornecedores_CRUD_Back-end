@@ -20,7 +20,7 @@ public class Empresa  {
     @Id
     private String cnpj;
     @Column
-    private String nomefantasia;
+    private String nomeFantasia;
     @Column
     private String cep;
     @ManyToMany
@@ -31,7 +31,7 @@ public class Empresa  {
 
     public Empresa(EmpresaInsertDTO data){
         this.cnpj = data.getCnpj();
-        this.nomefantasia = data.getNomeFantasia();
+        this.nomeFantasia = data.getNomeFantasia();
         this.cep = data.getCep();
     }
 
