@@ -1,20 +1,23 @@
 package com.example.fornecedores.entities;
 
-import com.example.fornecedores.dto.FornecedorRequestDTO;
+import com.example.fornecedores.dto.FornecedorInsertDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "fornecedor")
 @Entity(name = "fornecedor")
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fornecedor implements Serializable {
+public class Fornecedor  {
     @Id
     private String cnpjcpf;
     @Column
@@ -28,18 +31,16 @@ public class Fornecedor implements Serializable {
 //            joinColumns = @JoinColumn(name = "fornecedor_fk"),
 //            inverseJoinColumns= @JoinColumn( name = "empresa_fk"))
 //    private List<Empresa> empresas;
-    @OneToMany(mappedBy = "fornecedor")
-    private Set<RegistroEmpresa> registros;
+//    @OneToMany(mappedBy = "fornecedor")
+    @ManyToMany(mappedBy = "fornecedores")
+    private Set<Empresa> empresas = new HashSet<>();
 
-    public Fornecedor(FornecedorRequestDTO data) {
+    public Fornecedor(FornecedorInsertDTO data) {
         this.cnpjcpf = data.cpfCnpj();
         this.nome = data.nome();
         this.email = data.email();
         this.cep = data.cep();
+    }
 
-    }
-    public Set<RegistroEmpresa> getRegistros() {
-        return registros;
-    }
 
 }

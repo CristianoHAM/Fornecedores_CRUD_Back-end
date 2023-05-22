@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegistroEmpresa {
     @EmbeddedId
-    RegistroEmpresaKey regitroEmpresaKey;
+    private     RegistroEmpresaKey regitroEmpresaKey;
 
     @ManyToOne
     @MapsId("empresa_fk")
     @JoinColumn(name = "empresa_fk")
-    Empresa empresa;
+    private Empresa empresa;
 
     @ManyToOne
     @MapsId("fornecedor_fk")
     @JoinColumn(name = "fornecedor_fk")
-    Fornecedor fornecedor;
+    private Fornecedor fornecedor;
 
     public RegistroEmpresa(RegistroEmpresaResponseDTO data){
         this.empresa = data.empresa();

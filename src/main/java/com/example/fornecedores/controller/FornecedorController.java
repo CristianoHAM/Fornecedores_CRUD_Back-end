@@ -1,8 +1,7 @@
 package com.example.fornecedores.controller;
 
-import com.example.fornecedores.entities.Fornecedor;
-import com.example.fornecedores.repositories.FornecedorRepository;
-import com.example.fornecedores.dto.FornecedorRequestDTO;
+import com.example.fornecedores.dto.FornecedorDTO;
+import com.example.fornecedores.dto.FornecedorInsertDTO;
 import com.example.fornecedores.dto.FornecedorResponseDTO;
 import com.example.fornecedores.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,17 @@ import java.util.List;
 @CrossOrigin()
 public class FornecedorController {
     @Autowired
-    private FornecedorService fornecedorService;
+    private FornecedorService service;
 
-    //@PostMapping
-    //public void saveMotorcycle(@RequestBody FornecedorRequestDTO data) {
-    //Fornecedor fornecedor = new Fornecedor(data);
-     //   repository.save(fornecedor);
-    //}
 
     @GetMapping
     public List<FornecedorResponseDTO> getAll() {
-        List<FornecedorResponseDTO> fornecedores = fornecedorService.findAll();
+        List<FornecedorResponseDTO> fornecedores = service.findAll();
         return fornecedores;
+    }
+
+    @PostMapping
+    public  void insert(@RequestBody FornecedorInsertDTO data){
+        FornecedorDTO fornecedor = service.insert(data);
     }
 }
