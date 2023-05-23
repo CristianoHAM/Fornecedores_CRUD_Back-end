@@ -35,7 +35,10 @@ public class EmpresaService {
         if( validation != null){
             throw  new ServiceException("Empresa já cadastrado");
         }
-        Empresa empresa = new Empresa(data);
+        Empresa empresa = new Empresa();
+        empresa.setCnpj(data.getCnpj());
+        empresa.setNomeFantasia(data.getNomeFantasia());
+        empresa.setCep(data.getCep());
         empresa = repository.save(empresa);
         return new EmpresaDTO(empresa);
     }

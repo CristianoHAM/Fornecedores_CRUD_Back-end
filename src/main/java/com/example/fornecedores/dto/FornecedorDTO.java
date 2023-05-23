@@ -1,61 +1,57 @@
 package com.example.fornecedores.dto;
 
 import com.example.fornecedores.entities.Fornecedor;
+import com.example.fornecedores.entities.FornecedorPF;
+import com.example.fornecedores.entities.FornecedorPJ;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDate;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FornecedorDTO {
-    private String cnpjcpf;
+
+    private Long id;
     private String nome;
     private String email;
     private String cep;
+    private String tipo;
+    private String cnpj;
+    private String cpf;
+    private String rg;
+    private LocalDate dataNascimento;
 
 
-    public FornecedorDTO() {
+
+    public FornecedorDTO(FornecedorPJ fornecedor){
+        nome = fornecedor.getNome();
+        email = fornecedor.getEmail();
+        cep = fornecedor.getCep();
+        tipo = fornecedor.getTipo();
+        cnpj = fornecedor.getCnpj();
+        cpf = null;
+        rg = null;
+        dataNascimento = null;
     }
-
-    public FornecedorDTO(String cnpjcpf, String nome, String email, String cep) {
-        this.cnpjcpf = cnpjcpf;
-        this.nome = nome;
-        this.email = email;
-        this.cep = cep;
-
-    }
-    public FornecedorDTO(Fornecedor fornecedor){
-         cnpjcpf = fornecedor.getCnpjcpf();
-         nome = fornecedor.getNome();
-         email = fornecedor.getEmail();
-         cep = fornecedor.getCep();
-    }
-
-    public void setCnpjcpf(String cnpjcpf) {
-        this.cnpjcpf = cnpjcpf;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
+    public FornecedorDTO(FornecedorPF fornecedor){
+        nome = fornecedor.getNome();
+        email = fornecedor.getEmail();
+        cep = fornecedor.getCep();
+        tipo = fornecedor.getTipo();
+        cnpj = null;
+        cpf = fornecedor.getCpf();
+        rg = fornecedor.getRg();
+        dataNascimento = fornecedor.getDataNascimento();
     }
 
 
-    public String getCnpjcpf() {
-        return cnpjcpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCep() {
-        return cep;
-    }
 }

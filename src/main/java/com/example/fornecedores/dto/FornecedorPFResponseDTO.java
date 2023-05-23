@@ -14,37 +14,27 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FornecedorInsertDTO {
-    private String nome;
-    private String email;
-    private String cep;
+public class FornecedorPFResponseDTO {
+
+    private Long id;
     private String tipo;
-    private String cnpj;
     private String cpf;
     private String rg;
     private LocalDate dataNascimento;
+    private String nome;
+    private String email;
+    private String cep;
 
 
-    public FornecedorInsertDTO(FornecedorPJ fornecedor){
-         nome = fornecedor.getNome();
-         email = fornecedor.getEmail();
-         cep = fornecedor.getCep();
-         tipo = fornecedor.getTipo();
-         cnpj = fornecedor.getCnpj();
-         cpf = null;
-         rg = null;
-         dataNascimento = null;
-    }
-    public FornecedorInsertDTO(FornecedorPF fornecedor){
-        nome = fornecedor.getNome();
-        email = fornecedor.getEmail();
-        cep = fornecedor.getCep();
+    public FornecedorPFResponseDTO(FornecedorPF fornecedor){
+        id = fornecedor.getId();
         tipo = fornecedor.getTipo();
-        cnpj = null;
         cpf = fornecedor.getCpf();
         rg = fornecedor.getRg();
         dataNascimento = fornecedor.getDataNascimento();
+        nome = fornecedor.getNome();
+        email = fornecedor.getEmail();
+        cep = fornecedor.getCep();
     }
-
 
 }

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-
 @RestController
 @RequestMapping("empresa")
 @CrossOrigin()
@@ -35,4 +34,15 @@ public class EmpresaController {
             return ResponseEntity.unprocessableEntity().build();
         }
     }
+    /**
+    @PutMapping
+    public ResponseEntity<EmpresaDTO> update(@RequestBody EmpresaInsertDTO data){
+        return 0;
+    }
+    @DeleteMapping
+    public ResponseEntity<EmpresaDTO> remove(@RequestBody EmpresaInsertDTO data){
+        return ;
+    }
+    **/
 }
+

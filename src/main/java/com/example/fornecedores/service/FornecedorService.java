@@ -1,9 +1,11 @@
 package com.example.fornecedores.service;
 
-import com.example.fornecedores.dto.FornecedorDTO;
-import com.example.fornecedores.dto.FornecedorInsertDTO;
-import com.example.fornecedores.dto.FornecedorResponseDTO;
+import com.example.fornecedores.dto.*;
 import com.example.fornecedores.entities.Fornecedor;
+import com.example.fornecedores.entities.FornecedorPF;
+import com.example.fornecedores.entities.FornecedorPJ;
+import com.example.fornecedores.repositories.FornecedorPFRepository;
+import com.example.fornecedores.repositories.FornecedorPJRepository;
 import com.example.fornecedores.repositories.FornecedorRepository;
 import com.example.fornecedores.service.excepiton.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,14 @@ public class FornecedorService {
 
     @Autowired
     private FornecedorRepository repository;
+    @Autowired
+    private FornecedorPFRepository repositoryPF;
+    @Autowired
+    private FornecedorPJRepository repositoryPJ;
 
     @Transactional(readOnly = true)
     public Page<FornecedorResponseDTO> findAll(Pageable pageable){
-        Page<Fornecedor> fornecedores = repository.findAll(pageable);
+        Page<Fornecedor> fornecedores = repository.findFull(pageable);
         return fornecedores.map(FornecedorResponseDTO::new);
     }
     @Transactional(readOnly = true)
@@ -29,19 +35,47 @@ public class FornecedorService {
         return fornecedores.map(FornecedorResponseDTO::new);
     }
     @Transactional(readOnly = true)
-    public Page<FornecedorResponseDTO> searchByCnpjcpf(String cnpjcpf, Pageable pageable){
-        Page<Fornecedor> fornecedores = repository.findByCnpjcpfContainingIgnoreCase( cnpjcpf, pageable);
-        return fornecedores.map(FornecedorResponseDTO::new);
+    public Page<FornecedorPJResponseDTO> searchByCnpj(String cnpj, Pageable pageable){
+        Page<FornecedorPJ> fornecedores = repositoryPJ.findByCnpjContainingIgnoreCase( cnpj, pageable);
+        return fornecedores.map(FornecedorPJResponseDTO::new);
     }
-
-    public FornecedorDTO insert(FornecedorInsertDTO data){
-        Fornecedor fornecedorValidation = repository.findByCnpjcpf(data.getCnpjcpf());
-        if( fornecedorValidation != null){
-            throw  new ServiceException("Fornecedor já cadastrado");
+    @Transactional(readOnly = true)
+    public Page<FornecedorPFResponseDTO> searchByCpf(String cpf, Pageable pageable) {
+        Page<FornecedorPF> fornecedores = repositoryPF.findByCpfContainingIgnoreCase( cpf, pageable);
+        return fornecedores.map(FornecedorPFResponseDTO::new);
+    }
+    public FornecedorPJDTO insertPj(FornecedorPJInsertDTO data) {
+        Fornecedor ValidationCnpj = repositoryPJ.findByCnpj(data.getCnpj());
+        if (ValidationCnpj != null) {
+            throw new ServiceException("Fornecedor já cadastrado");
         }
-        Fornecedor fornecedor = new Fornecedor(data);
-        fornecedor = repository.save(fornecedor);
-        return new FornecedorDTO(fornecedor);
+        FornecedorPJ fornecedorPJ = new FornecedorPJ();
+        fornecedorPJ.setNome(data.getNome());
+        fornecedorPJ.setCep(data.getCep());
+        fornecedorPJ.setEmail(data.getEmail());
+        fornecedorPJ.setTipo("J");
+        fornecedorPJ.setCnpj(data.getCnpj());
+        fornecedorPJ = repositoryPJ.save(fornecedorPJ);
+        return new FornecedorPJDTO(fornecedorPJ);
     }
 
+    public FornecedorPFDTO insertPf(FornecedorPFInsertDTO data) {
+        Fornecedor ValidationCpf = repositoryPF.findByCpf(data.getCpf());
+        if (ValidationCpf != null) {
+            throw new ServiceException("Fornecedor já cadastrado");
+        }
+        FornecedorPF fornecedorPF = new FornecedorPF();
+        fornecedorPF.setNome(data.getNome());
+        fornecedorPF.setCep(data.getCep());
+        fornecedorPF.setEmail(data.getEmail());
+        fornecedorPF.setTipo("F");
+        fornecedorPF.setCpf(data.getCpf());
+        fornecedorPF.setRg(data.getRg());
+        fornecedorPF.setDataNascimento(data.getDataNascimento());
+        fornecedorPF = repository.save(fornecedorPF);
+        return new FornecedorPFDTO(fornecedorPF);
+    }
+
+/**
+**/
 }

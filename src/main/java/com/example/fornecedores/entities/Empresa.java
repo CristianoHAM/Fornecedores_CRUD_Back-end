@@ -9,12 +9,34 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "empresa")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "empresa")
+public class Empresa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "cnpj", unique = true, nullable = false)
+    private String cnpj;
+
+    @Column(name = "nome_fantasia", nullable = false)
+    private String nomeFantasia;
+
+    @Column(name = "cep", nullable = false)
+    private String cep;
+
+    @ManyToMany
+    @JoinTable(name = "empresa_fornecedor",
+            joinColumns = @JoinColumn(name = "id_empresa"),
+            inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
+     Set<Fornecedor> fornecedores = new HashSet<>();
+
+}
+/**
 public class Empresa  {
 
     @Id
@@ -29,13 +51,6 @@ public class Empresa  {
         inverseJoinColumns= @JoinColumn( name = "fornecedor_fk"))
     Set<Fornecedor> fornecedores = new HashSet<>();
 
-    public Empresa(EmpresaInsertDTO data){
-        this.cnpj = data.getCnpj();
-        this.nomeFantasia = data.getNomeFantasia();
-        this.cep = data.getCep();
-    }
-
-
-
-
 }
+
+**/
