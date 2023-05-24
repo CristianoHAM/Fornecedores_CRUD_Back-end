@@ -5,11 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
 
 @Setter
 @Getter
@@ -36,24 +34,22 @@ public abstract class Fornecedor {
     @Column(insertable=false, updatable=false)
     private String tipo;
 
+    @Column( updatable=false)
+    private String cnpj;
+
+    @Column( updatable=false)
+    private String cpf;
+
+    @Column( updatable=false)
+    private String rg;
+
+    @Column( updatable=false)
+    private LocalDate dataNascimento;
 
 
     @ManyToMany(mappedBy = "fornecedores")
     private Set<Empresa> empresas = new HashSet<>();
 
 }
-/**
-public class Fornecedor  {
-    @Id
-    private String id;
-    @Column
-    private String nome;
-    @Column
-    private String email;
-    @Column
-    private String cep;
-    @ManyToMany(mappedBy = "fornecedores")
-    private Set<Empresa> empresas = new HashSet<>();
-}
-**/
+
 

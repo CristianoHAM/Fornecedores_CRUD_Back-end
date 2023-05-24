@@ -1,6 +1,5 @@
 package com.example.fornecedores.entities;
 
-import com.example.fornecedores.dto.EmpresaInsertDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,21 +35,3 @@ public class Empresa {
      Set<Fornecedor> fornecedores = new HashSet<>();
 
 }
-/**
-public class Empresa  {
-
-    @Id
-    private String cnpj;
-    @Column
-    private String nomeFantasia;
-    @Column
-    private String cep;
-    @ManyToMany
-    @JoinTable(name = "empresa_fornecedor",
-        joinColumns = @JoinColumn(name = "empresa_fk"),
-        inverseJoinColumns= @JoinColumn( name = "fornecedor_fk"))
-    Set<Fornecedor> fornecedores = new HashSet<>();
-
-}
-
-**/

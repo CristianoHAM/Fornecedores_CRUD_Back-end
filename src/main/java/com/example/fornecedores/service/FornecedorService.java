@@ -45,18 +45,18 @@ public class FornecedorService {
         return fornecedores.map(FornecedorPFResponseDTO::new);
     }
     public FornecedorPJDTO insertPj(FornecedorPJInsertDTO data) {
-        Fornecedor ValidationCnpj = repositoryPJ.findByCnpj(data.getCnpj());
+        FornecedorPJ ValidationCnpj = repositoryPJ.findByCnpj(data.getCnpj());
         if (ValidationCnpj != null) {
             throw new ServiceException("Fornecedor já cadastrado");
         }
-        FornecedorPJ fornecedorPJ = new FornecedorPJ();
-        fornecedorPJ.setNome(data.getNome());
-        fornecedorPJ.setCep(data.getCep());
-        fornecedorPJ.setEmail(data.getEmail());
-        fornecedorPJ.setTipo("J");
-        fornecedorPJ.setCnpj(data.getCnpj());
-        fornecedorPJ = repositoryPJ.save(fornecedorPJ);
-        return new FornecedorPJDTO(fornecedorPJ);
+        FornecedorPJ fornecedor =  new FornecedorPJ();
+        fornecedor.setNome(data.getNome());
+        fornecedor.setCep(data.getCep());
+        fornecedor.setEmail(data.getEmail());
+        fornecedor.setTipo("J");
+        fornecedor.setCnpj(data.getCnpj());
+        fornecedor = repositoryPJ.save(fornecedor);
+        return new FornecedorPJDTO(fornecedor);
     }
 
     public FornecedorPFDTO insertPf(FornecedorPFInsertDTO data) {
@@ -72,10 +72,8 @@ public class FornecedorService {
         fornecedorPF.setCpf(data.getCpf());
         fornecedorPF.setRg(data.getRg());
         fornecedorPF.setDataNascimento(data.getDataNascimento());
-        fornecedorPF = repository.save(fornecedorPF);
+        fornecedorPF = repositoryPF.save(fornecedorPF);
         return new FornecedorPFDTO(fornecedorPF);
     }
 
-/**
-**/
 }

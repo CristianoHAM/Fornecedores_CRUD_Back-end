@@ -6,10 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,12 +16,10 @@ public class EmpresaResponseDTO {
     private String nomeFantasia;
     private String cep;
 
-
     public EmpresaResponseDTO(Empresa empresa){
         id = empresa.getId();
         cnpj = empresa.getCnpj();
         nomeFantasia = empresa.getNomeFantasia();
         cep = empresa.getCep();
     }
-
 }

@@ -1,13 +1,10 @@
 package com.example.fornecedores.dto;
 
 import com.example.fornecedores.entities.Fornecedor;
-import com.example.fornecedores.entities.FornecedorPF;
-import com.example.fornecedores.entities.FornecedorPJ;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 
 @Setter
@@ -15,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FornecedorResponseDTO {
-
     private Long id;
     private String nome;
     private String email;
@@ -26,35 +22,15 @@ public class FornecedorResponseDTO {
     private String rg;
     private LocalDate dataNascimento;
 
-
-
-
     public FornecedorResponseDTO(Fornecedor fornecedor){
         id = fornecedor.getId();
         nome = fornecedor.getNome();
         email = fornecedor.getEmail();
         cep = fornecedor.getCep();
         tipo = fornecedor.getTipo();
-    }
-    public FornecedorResponseDTO(FornecedorPJ fornecedor){
-        nome = fornecedor.getNome();
-        email = fornecedor.getEmail();
-        cep = fornecedor.getCep();
-        tipo = fornecedor.getTipo();
         cnpj = fornecedor.getCnpj();
-        cpf = null;
-        rg = null;
-        dataNascimento = null;
-    }
-    public FornecedorResponseDTO(FornecedorPF fornecedor){
-        nome = fornecedor.getNome();
-        email = fornecedor.getEmail();
-        cep = fornecedor.getCep();
-        tipo = fornecedor.getTipo();
-        cnpj = null;
         cpf = fornecedor.getCpf();
         rg = fornecedor.getRg();
         dataNascimento = fornecedor.getDataNascimento();
     }
-
 }

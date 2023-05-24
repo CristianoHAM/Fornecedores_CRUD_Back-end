@@ -69,6 +69,5 @@ public class FornecedorController {
             return ResponseEntity.unprocessableEntity().build();
         }
     }
-    /**
-     **/
+
 }

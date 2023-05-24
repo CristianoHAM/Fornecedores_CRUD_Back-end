@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +25,6 @@ public class EmpresaDTO {
         cnpj = empresa.getCnpj();
         nomeFantasia = empresa.getNomeFantasia();
         cep = empresa.getCep();
-       // fornecedores = empresa.getFornecedores().stream().map(FornecedorDTO::new).collect(Collectors.toList());
+        fornecedores = empresa.getFornecedores().stream().map(FornecedorDTO::new).collect(Collectors.toList());
     }
-
 }

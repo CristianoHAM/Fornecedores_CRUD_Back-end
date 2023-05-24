@@ -33,7 +33,7 @@ public class EmpresaService {
     public EmpresaDTO insert(EmpresaInsertDTO data) {
         Empresa validation = repository.findByCnpj(data.getCnpj());
         if( validation != null){
-            throw  new ServiceException("Empresa já cadastrado");
+            throw  new ServiceException("Empresa já cadastrada");
         }
         Empresa empresa = new Empresa();
         empresa.setCnpj(data.getCnpj());

@@ -1,12 +1,10 @@
 package com.example.fornecedores.dto;
 
-import com.example.fornecedores.entities.Fornecedor;
 import com.example.fornecedores.entities.FornecedorPF;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 
 @Setter
@@ -14,17 +12,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FornecedorPFDTO {
-
     private Long id;
+    private String nome;
+    private String email;
+    private String cep;
     private String tipo;
     private String cpf;
     private String rg;
     private LocalDate dataNascimento;
-    private String nome;
-    private String email;
-    private String cep;
-
-
 
     public FornecedorPFDTO(FornecedorPF fornecedor){
          id = fornecedor.getId();
@@ -36,7 +31,4 @@ public class FornecedorPFDTO {
          rg = fornecedor.getRg();
          dataNascimento = fornecedor.getDataNascimento();
     }
-
-
-
 }
