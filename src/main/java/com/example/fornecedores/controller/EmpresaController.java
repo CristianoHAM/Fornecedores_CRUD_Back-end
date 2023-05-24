@@ -19,30 +19,58 @@ public class EmpresaController {
     private EmpresaService service;
 
     @GetMapping
-    public ResponseEntity<Page<EmpresaResponseDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<EmpresaResponseDTO>> findAll(Pageable pageable) {
         Page<EmpresaResponseDTO> empresas = service.findAll(pageable);
         return ResponseEntity.ok(empresas);
     }
 
+    @GetMapping("/{cnpj}")
+    public ResponseEntity<Page<EmpresaResponseDTO>> findByCnpj(@PathVariable String cnpj, Pageable pageable) {
+        try {
+            Page<EmpresaResponseDTO> empresa = service.findByCnpj(pageable, cnpj);
+            return ResponseEntity.ok(empresa);
+        } catch (SecurityException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
-    public ResponseEntity<EmpresaDTO> insert(@RequestBody EmpresaInsertDTO data){
-        try{
+    public ResponseEntity<EmpresaDTO> insert(@RequestBody EmpresaInsertDTO data) {
+        try {
             EmpresaDTO fornecedor = service.insert(data);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(data.getCnpj()).toUri();
             return ResponseEntity.created(uri).body(fornecedor);
-        }catch (SecurityException e){
+            //return ResponseEntity.status(HttpStatus.CREATED).body(fornecedor);
+        } catch (SecurityException e) {
             return ResponseEntity.unprocessableEntity().build();
         }
     }
-    /**
-    @PutMapping
-    public ResponseEntity<EmpresaDTO> update(@RequestBody EmpresaInsertDTO data){
-        return 0;
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmpresaDTO> atualizar(@PathVariable Long id, @RequestBody EmpresaInsertDTO empresa) {
+        try {
+            EmpresaDTO empresaAtualizada = service.update(id, empresa);
+            return ResponseEntity.ok(empresaAtualizada);
+        } catch (SecurityException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
-    @DeleteMapping
-    public ResponseEntity<EmpresaDTO> remove(@RequestBody EmpresaInsertDTO data){
-        return ;
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        try {
+            service.delete(id);
+                return ResponseEntity.noContent().build();
+        } catch (SecurityException e) {
+          //  return ResponseEntity.unprocessableEntity().build();
+            return ResponseEntity.notFound().build();
+        }
+
     }
-    **/
+
 }
+
+
+
 
